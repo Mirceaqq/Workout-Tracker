@@ -219,3 +219,149 @@ a:hover {
     font-size: 13px;
     color: var(--muted);
 }
+
+/* SPLIT LAYOUT */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 56px);
+}
+
+.split-left {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 0.5px solid var(--border);
+}
+
+.split-quote {
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 32px;
+}
+
+.split-brand {
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 0.05em;
+}
+
+.split-right {
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 480px;
+}
+
+.auth-form h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 32px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    background-color: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    height: 44px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+}
+
+.form-group-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.form-group-check label {
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: rgba(220, 38, 38, 0.15);
+    border: 0.5px solid rgba(220, 38, 38, 0.4);
+    color: #f87171;
+}
+
+.alert-success {
+    background-color: rgba(200, 255, 0, 0.1);
+    border: 0.5px solid rgba(200, 255, 0, 0.3);
+    color: var(--accent);
+}
+
+.auth-link {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-link a {
+    color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .split-left {
+        display: none;
+    }
+
+    .split-right {
+        padding: 40px 24px;
+    }
+}
