@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = registerUser($name, $email, $password);
     if ($user) {
       session_regenerate_id(true);
-      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['user_id']   = $user['id'];
+      $_SESSION['user_name'] = $user['name'];
       header('Location: dashboard.php?welcome=1');
       exit;
     } else {

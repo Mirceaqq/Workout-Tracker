@@ -4,7 +4,8 @@ require_once __DIR__ . '/functions.php';
 
 define('USERS_FILE', dirname(__DIR__) . '/data/users.json');
 
-function registerUser($name, $email, $password) {
+function registerUser($name, $email, $password)
+{
     $name  = sanitize($name);
     $email = strtolower(trim($email));
 
@@ -32,7 +33,8 @@ function registerUser($name, $email, $password) {
     return $user;
 }
 
-function loginUser($email, $password) {
+function loginUser($email, $password)
+{
     $email = strtolower(trim($email));
     if (empty($email) || empty($password)) return false;
 
@@ -45,7 +47,8 @@ function loginUser($email, $password) {
     return false;
 }
 
-function getCurrentUser() {
+function getCurrentUser()
+{
     if (!isset($_SESSION['user_id'])) return null;
     $users = readJson(USERS_FILE);
     foreach ($users as $u) {
@@ -54,21 +57,24 @@ function getCurrentUser() {
     return null;
 }
 
-function requireLogin() {
+function requireLogin()
+{
     if (!isset($_SESSION['user_id'])) {
         header('Location: login.php');
         exit;
     }
 }
 
-function requireGuest() {
+function requireGuest()
+{
     if (isset($_SESSION['user_id'])) {
         header('Location: dashboard.php');
         exit;
     }
 }
 
-function updateProfile($userId, $data) {
+function updateProfile($userId, $data)
+{
     $users = readJson(USERS_FILE);
     foreach ($users as &$u) {
         if ($u['id'] !== $userId) continue;
@@ -81,7 +87,8 @@ function updateProfile($userId, $data) {
     return writeJson(USERS_FILE, $users);
 }
 
-function changePassword($userId, $currentPw, $newPw) {
+function changePassword($userId, $currentPw, $newPw)
+{
     $users = readJson(USERS_FILE);
     foreach ($users as &$u) {
         if ($u['id'] !== $userId) continue;
@@ -94,7 +101,8 @@ function changePassword($userId, $currentPw, $newPw) {
     return writeJson(USERS_FILE, $users);
 }
 
-function deleteAccount($userId) {
+function deleteAccount($userId)
+{
     $users = readJson(USERS_FILE);
     $users = array_values(array_filter($users, fn($u) => $u['id'] !== $userId));
     writeJson(USERS_FILE, $users);
