@@ -2267,3 +2267,520 @@ input[type="checkbox"] {
         display: none;
     }
 }
+
+/* ===== NOI CLASEE PENTRU EXERCIȚII CU SETURI ===== */
+.exercise-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+}
+
+.exercise-block:hover {
+    border-color: rgba(200, 255, 0, 0.3);
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.exercise-name-input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-inp);
+    padding: 10px 12px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.btn-remove-exercise {
+    background: var(--danger-dim);
+    border: none;
+    color: var(--danger);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-remove-exercise:hover {
+    background: rgba(255, 69, 69, 0.3);
+}
+
+.sets-container {
+    margin-bottom: 12px;
+}
+
+.sets-header {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr 40px;
+    gap: 12px;
+    padding: 6px 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+}
+
+.set-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr 40px;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.set-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.set-row input {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-inp);
+    padding: 8px 10px;
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+.btn-remove-set {
+    background: var(--danger-dim);
+    border: none;
+    color: var(--danger);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-remove-set:hover {
+    background: rgba(255, 69, 69, 0.3);
+}
+
+.btn-add-set {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: var(--r-btn);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+
+.btn-add-set:hover {
+    background: var(--accent-dim);
+}
+
+.btn-add-exercise {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    padding: 8px 18px;
+    border-radius: var(--r-btn);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+
+.btn-add-exercise:hover {
+    background: var(--accent-dim);
+}
+
+/* ===== CONTACT PAGE ===== */
+.contact-card {
+    max-width: 620px;
+    margin: 32px auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: 32px 36px;
+    box-shadow: var(--shadow);
+}
+
+.contact-title {
+    font-size: 1.75rem;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+
+.contact-subtitle {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 0.9rem;
+}
+
+.contact-success {
+    text-align: center;
+    padding: 28px 16px;
+    background: var(--success-dim);
+    border-radius: var(--r-card);
+}
+
+.contact-success-icon {
+    font-size: 2.5rem;
+    color: var(--success);
+    margin-bottom: 12px;
+}
+
+.contact-success-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: 6px;
+}
+
+.contact-success-msg {
+    color: var(--muted);
+}
+
+/* Responsive pentru contact */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 24px;
+        margin: 16px;
+    }
+
+    .sets-header,
+    .set-row {
+        grid-template-columns: 50px 1fr 1fr 32px;
+        gap: 8px;
+    }
+}
+
+/* ===== PROFILE MODAL ===== */
+.profile-modal-box {
+    max-width: 420px;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+}
+
+.profile-modal-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profile-modal-avatar {
+    width: 56px;
+    height: 56px;
+    background: var(--accent-dim);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.profile-modal-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.profile-modal-email {
+    font-size: 0.8rem;
+    color: var(--muted);
+    word-break: break-all;
+}
+
+.profile-menu {
+    padding: 8px 0;
+}
+
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.profile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.profile-menu-danger {
+    color: var(--danger);
+    border-top: 1px solid var(--border);
+    margin-top: 6px;
+}
+
+.profile-menu-danger:hover {
+    background: var(--danger-dim);
+}
+
+.profile-menu-item svg {
+    flex-shrink: 0;
+}
+
+/* ===== HOVER EFFECTE PENTRU CLICKABILITY ===== */
+button,
+.sidebar-link,
+.profile-menu-item,
+.btn-primary,
+.btn-ghost,
+.btn-danger,
+.btn-add-exercise,
+.btn-add-set,
+.btn-remove-exercise,
+.btn-remove-set,
+.modal-close,
+.avatar,
+[data-modal-open],
+[data-modal-close] {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Efect suplimentar pentru butoanele care nu au deja hover */
+button:hover,
+.btn-primary:hover,
+.btn-ghost:hover,
+.btn-danger:hover,
+.btn-add-exercise:hover,
+.btn-add-set:hover,
+.modal-close:hover,
+.avatar:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+}
+
+/* pentru link-urile din sidebar */
+.sidebar-link:hover {
+    background: var(--card);
+    color: var(--text);
+    transform: scale(1.02);
+}
+
+/* elementele din meniul profil */
+.profile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+}
+
+/* butonul de ștergere cont */
+.profile-menu-danger:hover {
+    background: var(--danger-dim);
+}
+
+/* asigură că și butoanele de tip submit din formulare au cursor pointer */
+input[type="submit"],
+button[type="submit"] {
+    cursor: pointer;
+}
+
+/* Smooth transitions */
+body {
+    transition: opacity 0.25s ease-in-out;
+}
+
+body.page-fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+a,
+button,
+.sidebar-link,
+.btn-primary,
+.btn-ghost,
+.profile-menu-item {
+    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.modal {
+    transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.modal.open {
+    transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.modal-box {
+    transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.2s;
+    transform: scale(0.96);
+    opacity: 0;
+}
+
+.modal.open .modal-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-overlay {
+    transition: opacity 0.2s;
+}
+
+.sidebar-link svg {
+    transition: transform 0.15s;
+}
+
+.sidebar-link:hover svg {
+    transform: scale(1.08);
+}
+
+.stat-card,
+.card,
+.exercise-block,
+.contact-card {
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary,
+.btn-ghost,
+.btn-danger,
+.btn-add-exercise,
+.btn-add-set {
+    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.alert {
+    transition: opacity 0.4s, transform 0.3s;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Landing page enhancements */
+.lp-hero-left,
+.lp-hero-right,
+.lp-feature-card,
+.lp-stat-item,
+.lp-cta {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.lp-hero-left.animate-in,
+.lp-hero-right.animate-in,
+.lp-feature-card.animate-in,
+.lp-stat-item.animate-in,
+.lp-cta.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lp-feature-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+}
+
+.lp-stat-item:hover .lp-stat-num {
+    color: var(--accent);
+    text-shadow: 0 0 6px rgba(200, 255, 0, 0.3);
+}
+
+.lp-btn-primary,
+.lp-nav-cta {
+    transition: all 0.25s ease;
+}
+
+.lp-btn-primary:hover,
+.lp-nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(200, 255, 0, 0.25);
+    filter: brightness(1.05);
+}
+
+.lp-nav-links a,
+.lp-nav-signin {
+    transition: color 0.2s;
+}
+
+.lp-nav-links a:hover,
+.lp-nav-signin:hover {
+    color: var(--accent);
+}
+
+html {
+    scroll-behavior: smooth;
+}

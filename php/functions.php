@@ -91,3 +91,106 @@ function lbsToKg($lbs)
 {
     return round((float)$lbs / 2.20462, 2);
 }
+function calculateVolume($sets)
+{
+    $volume = 0;
+    foreach ($sets as $set) {
+        $volume += ($set['weight'] ?? 0) * ($set['reps'] ?? 0);
+    }
+    return $volume;
+}
+
+function formatDuration($minutes)
+{
+    if ($minutes < 60) return $minutes . ' min';
+    $hours = floor($minutes / 60);
+    $mins = $minutes % 60;
+    return $hours . 'h ' . ($mins > 0 ? $mins . 'min' : '');
+}
+
+function findPersonalRecord($workouts, $exerciseName)
+{
+    $maxWeight = 0;
+    $bestSet = null;
+    foreach ($workouts as $w) {
+        foreach ($w['exercises'] as $ex) {
+            if (strtolower(trim($ex['name'])) === strtolower(trim($exerciseName))) {
+                foreach ($ex['sets'] as $set) {
+                    $weight = (float)($set['weight'] ?? 0);
+                    if ($weight > $maxWeight) {
+                        $maxWeight = $weight;
+                        $bestSet = $set;
+                    }
+                }
+            }
+        }
+    }
+    return $bestSet ? ['weight' => $maxWeight, 'reps' => $bestSet['reps']] : null;
+}
+
+function getLastWorkoutDate($workouts)
+{
+    if (empty($workouts)) return null;
+    usort($workouts, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+    return $workouts[0]['date'];
+}
+
+function isValidWorkout($workout)
+{
+    if (empty($workout['name']) || empty($workout['exercises'])) return false;
+    foreach ($workout['exercises'] as $ex) {
+        if (empty($ex['name']) || empty($ex['sets'])) return false;
+        foreach ($ex['sets'] as $set) {
+            if (!isset($set['reps']) || !isset($set['weight'])) return false;
+            if ($set['reps'] < 1 || $set['weight'] < 0) return false;
+        }
+    }
+    return true;
+}
+
+function getTotalExercisesCount($workouts)
+{
+    $count = 0;
+    foreach ($workouts as $w) {
+        $count += count($w['exercises']);
+    }
+    return $count;
+}
+
+function getTotalSetsCount($workouts)
+{
+    $count = 0;
+    foreach ($workouts as $w) {
+        foreach ($w['exercises'] as $ex) {
+            $count += count($ex['sets']);
+        }
+    }
+    return $count;
+}
+
+function getTotalVolume($workouts)
+{
+    $total = 0;
+    foreach ($workouts as $w) {
+        foreach ($w['exercises'] as $ex) {
+            $total += calculateVolume($ex['sets']);
+        }
+    }
+    return $total;
+}
+
+function getAverageWeightPerExercise($workouts, $exerciseName)
+{
+    $weights = [];
+    foreach ($workouts as $w) {
+        foreach ($w['exercises'] as $ex) {
+            if (strtolower(trim($ex['name'])) === strtolower(trim($exerciseName))) {
+                foreach ($ex['sets'] as $set) {
+                    $weights[] = (float)($set['weight'] ?? 0);
+                }
+            }
+        }
+    }
+    if (empty($weights)) return 0;
+    return round(array_sum($weights) / count($weights), 2);
+}
