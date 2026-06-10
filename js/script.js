@@ -10,6 +10,85 @@ window.closeModal = function (id) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // ========== MODAL CONFIRMARE PERSONALIZAT (pentru ștergere antrenament și ștergere cont) ==========
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmTitle = document.getElementById('confirmModalTitle');
+    const confirmMessage = document.getElementById('confirmModalMessage');
+    const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+    const confirmOkBtn = document.getElementById('confirmOkBtn');
+
+    function showConfirmModal(title, message, confirmButtonText, onConfirm, onCancel) {
+        confirmTitle.textContent = title;
+        confirmMessage.textContent = message;
+        confirmOkBtn.textContent = confirmButtonText;
+        confirmModal.style.display = 'flex';
+
+        function handleConfirm() {
+            cleanup();
+            if (onConfirm) onConfirm();
+        }
+        function handleCancel() {
+            cleanup();
+            if (onCancel) onCancel();
+        }
+        function cleanup() {
+            confirmOkBtn.removeEventListener('click', handleConfirm);
+            confirmCancelBtn.removeEventListener('click', handleCancel);
+            confirmModal.removeEventListener('click', outsideClick);
+            document.removeEventListener('keydown', escapeHandler);
+            // Resetăm textul butonului la valoarea implicită pentru următoarea utilizare
+            confirmOkBtn.textContent = 'Șterge';
+        }
+        function outsideClick(e) {
+            if (e.target === confirmModal) handleCancel();
+        }
+        function escapeHandler(e) {
+            if (e.key === 'Escape') handleCancel();
+        }
+
+        confirmOkBtn.addEventListener('click', handleConfirm);
+        confirmCancelBtn.addEventListener('click', handleCancel);
+        confirmModal.addEventListener('click', outsideClick);
+        document.addEventListener('keydown', escapeHandler);
+    }
+
+    // 1. Ștergere antrenament
+    document.querySelectorAll('[data-confirm-action="delete_workout"]').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            if (!form) return;
+            const title = this.getAttribute('data-confirm-title') || 'Ștergi antrenamentul?';
+            const workoutName = this.getAttribute('data-workout-name') || 'acest antrenament';
+            showConfirmModal(
+                title,
+                workoutName,
+                'Șterge',
+                () => { form.submit(); },
+                () => { }
+            );
+        });
+    });
+
+    // 2. Ștergere cont
+    const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+    if (deleteAccountBtn) {
+        deleteAccountBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const title = this.getAttribute('data-confirm-title') || 'Ștergere cont';
+            const message = this.getAttribute('data-confirm-message') || 'Ești sigur? Contul și toate antrenamentele tale vor fi șterse permanent.';
+            showConfirmModal(
+                title,
+                message,
+                'Șterge cont',
+                () => {
+                    document.getElementById('deleteAccountForm').submit();
+                },
+                () => { }
+            );
+        });
+    }
+
     // Auto-hide alerts
     document.querySelectorAll('.alert').forEach(function (el) {
         setTimeout(function () {
@@ -32,13 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('input[required], textarea[required]').forEach(function (el) {
         el.addEventListener('input', function () {
             if (el.value.trim()) el.classList.remove('invalid');
-        });
-    });
-
-    // Confirm dialogs
-    document.querySelectorAll('[data-confirm]').forEach(function (el) {
-        el.addEventListener('click', function (e) {
-            if (!confirm(el.getAttribute('data-confirm') || 'Ești sigur?')) e.preventDefault();
         });
     });
 
@@ -155,13 +227,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Inițializare container cu un exercițiu (implicit)
     function initExercisesContainer() {
         exercisesContainer.innerHTML = '';
         var firstBlock = createExerciseBlock(0);
         exercisesContainer.appendChild(firstBlock);
         attachRemoveExerciseEvent(firstBlock);
-        // atașăm eveniment pentru butonul de ștergere set pe primul set
         var firstSetRow = firstBlock.querySelector('.set-row');
         if (firstSetRow) attachRemoveSetEvent(firstSetRow);
     }
@@ -173,16 +243,15 @@ document.addEventListener('DOMContentLoaded', function () {
             var newBlock = createExerciseBlock(newIdx);
             exercisesContainer.appendChild(newBlock);
             attachRemoveExerciseEvent(newBlock);
-            // pentru noul bloc, atașăm eveniment la fiecare set-row existent
             newBlock.querySelectorAll('.set-row').forEach(function (row) {
                 attachRemoveSetEvent(row);
             });
             reindexAllExercises();
         });
     }
-
-    // Pentru orice set adăugat dinamic după crearea inițială, evenimentul e deja adăugat în createSetRow apelat din addSetBtn
 });
+
+// ========== SMOOTH NAVIGATION & LOADING ==========
 (function () {
     const loadingOverlay = document.createElement('div');
     loadingOverlay.className = 'loading-overlay';
@@ -235,6 +304,8 @@ document.addEventListener('DOMContentLoaded', function () {
         loadingOverlay.classList.remove('active');
     });
 })();
+
+// ========== LANDING PAGE ANIMATIONS ==========
 (function () {
     const animatedElements = document.querySelectorAll('.lp-hero-left, .lp-hero-right, .lp-feature-card, .lp-stat-item, .lp-cta');
     const observer = new IntersectionObserver((entries) => {

@@ -42,48 +42,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body class="auth-body">
 
-  <div class="auth-page">
+  <div class="auth-page" id="authPage">
 
-    <!-- Left panel -->
     <div class="auth-left">
       <a href="index.php" class="auth-logo">WT.</a>
-
       <div class="auth-left-body">
         <div class="auth-accent-line"></div>
-        <blockquote class="auth-quote">
-          "Constanța bate intensitatea."
-        </blockquote>
+        <blockquote class="auth-quote">"Constanța bate intensitatea."</blockquote>
         <p class="auth-quote-cite">— Principiul progresului</p>
       </div>
-
       <p class="auth-left-footer">Workout Tracker &middot; <?php echo date('Y'); ?></p>
     </div>
 
-    <!-- Right panel -->
     <div class="auth-right">
       <div class="auth-form-wrap">
-
         <h1 class="auth-title">Bun venit înapoi</h1>
         <p class="auth-subtitle">Autentifică-te pentru a continua.</p>
 
         <?php if ($error): ?>
-          <div class="auth-alert">&#x26A0;&nbsp; <?php echo $error; ?></div>
+          <div class="auth-alert">⚠️ <?php echo $error; ?></div>
         <?php endif; ?>
 
-        <form method="POST" action="login.php">
+        <form method="POST" action="login.php" id="loginForm">
 
-          <div class="auth-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email"
-              placeholder="exemplu@email.com"
-              value="<?php echo sanitize($_POST['email'] ?? ''); ?>"
-              required autofocus>
+          <div style="margin-bottom:16px;">
+            <label for="email" style="display:block;font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Email</label>
+            <input type="email" id="email" name="email" placeholder="exemplu@email.com" value="<?php echo sanitize($_POST['email'] ?? ''); ?>" style="height:48px;background:#111;border:1px solid #2A2A2A;border-radius:10px;padding:0 16px;font-size:14px;color:#F5F5F5;width:100%;outline:none;font-family:inherit;position:relative;z-index:10;">
           </div>
 
-          <div class="auth-field">
-            <label for="password">Parolă</label>
-            <input type="password" id="password" name="password"
-              placeholder="••••••••" required>
+          <div style="margin-bottom:16px;">
+            <label for="password" style="display:block;font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Parolă</label>
+            <input type="password" id="password" name="password" placeholder="Parola ta" style="height:48px;background:#111;border:1px solid #2A2A2A;border-radius:10px;padding:0 16px;font-size:14px;color:#F5F5F5;width:100%;outline:none;font-family:inherit;position:relative;z-index:10;">
           </div>
 
           <div class="auth-check">
@@ -93,20 +82,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
           </div>
 
-          <button type="submit" class="auth-btn">
-            Autentifică-te &rarr;
-          </button>
-
+          <button type="submit" class="auth-btn" id="submitBtn">Autentifica-te →</button>
         </form>
 
-        <p class="auth-switch">
-          Nu ai cont?
-          <a href="register.php">Creează unul gratuit</a>
-        </p>
-
+        <p class="auth-switch">Nu ai cont? <a href="register.php">Creează unul gratuit</a></p>
       </div>
     </div>
-
   </div>
 
   <script src="js/script.js"></script>
